@@ -9,10 +9,10 @@ script:
     - docker run -e CI=true adnadn/react-test npm test
 
 after_sucess:
-    - docker build -t adn888/multi-client ./client
-    - docker build -t adn888/multi-nginx ./nginx   
-    - docker build -t adn888/multi-server ./server   
-    - docker build -t adn888/multi-worker ./worker   
+    - docker build -t adnadn/multi-client ./client
+    - docker build -t adnadn/multi-nginx ./nginx   
+    - docker build -t adnadn/multi-server ./server   
+    - docker build -t adnadn/multi-worker ./worker   
     #Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin    
     #Take those images and push to dockerhub
