@@ -3,11 +3,11 @@ services:
     - docker
 
 before install:
-    - docker build -t adn888/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t adnadn/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true adn888/react-test npm test
-    
+    - docker run -e CI=true adnadn/react-test npm test
+
 after_sucess:
     - docker build -t adn888/multi-client ./client
     - docker build -t adn888/multi-nginx ./nginx   
@@ -16,8 +16,8 @@ after_sucess:
     #Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin    
     #Take those images and push to dockerhub
-    - docker push adn888/multi-client 
-    - docker push adn888/multi-nginx 
-    - docker push adn888/multi-server 
-    - docker push adn888/multi-worker 
+    - docker push adnadn/multi-client 
+    - docker push adnadn/multi-nginx 
+    - docker push adnadn/multi-server 
+    - docker push adnadn/multi-worker 
 
