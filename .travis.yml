@@ -21,3 +21,15 @@ after_sucess:
     - docker push adnadn/multi-server 
     - docker push adnadn/multi-worker 
 
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    region: us-east-2
+    app: multi-docker
+    env: MultiDocker-env
+    bucket_name: elasticbeanstalk-us-east-2-263203075016
+    bucker_path: docker-multi
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
