@@ -1,0 +1,23 @@
+sudo: required
+services:
+    - docker
+
+before install:
+    - docker build -t adn888/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -t adn888/react-test npm test -- --coverage
+
+after_sucess:
+    - docker build -t adn888/multi-client ./client
+    - docker build -t adn888/multi-nginx ./nginx   
+    - docker build -t adn888/multi-server ./server   
+    - docker build -t adn888/multi-worker ./worker   
+    #Log in to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin    
+    #Take those images and push to dockerhub
+    - docker push adn888/multi-client 
+    - docker push adn888/multi-nginx 
+    - docker push adn888/multi-server 
+    - docker push adn888/multi-worker 
+
